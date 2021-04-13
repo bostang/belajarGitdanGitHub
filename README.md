@@ -4,4 +4,3 @@ dokumentasi pembelajaran git dan gitHub dari channel youtube web programming UNP
 motivasi utama : keberlancaran dalam pengerjaan kelompok Tugas besar
 motivasi tambahan : 
   - kebergunaan jangka panjang
-  - biar gak gabut
