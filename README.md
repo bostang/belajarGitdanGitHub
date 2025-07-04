@@ -80,3 +80,62 @@ git merge --continue
 | Hotfix produksi      | main/master     | hotfix/xxx         | git checkout -b, merge ke develop & main |
 
 Dengan workflow ini, setiap anggota tim bisa bekerja paralel tanpa saling mengganggu, proses review berjalan transparan, dan branch utama tetap stabil. Jika ingin lebih detail tentang Gitflow atau workflow lain, kamu bisa eksplorasi dokumentasi resmi atau tutorial lanjutan
+
+---
+
+Untuk melakukan merge branch `feature/feature1` ke branch `develop`, kamu bisa ikuti langkah-langkah berikut:
+
+1. **Pindah ke branch develop:**
+   ```bash
+   git checkout develop
+   ```
+2. **Update branch develop agar sinkron dengan remote (opsional tapi disarankan):**
+   ```bash
+   git pull origin develop
+   ```
+3. **Lakukan merge branch feature/feature1 ke develop:**
+   ```bash
+   git merge feature/feature1
+   ```
+   - Jika tidak ada konflik, Git akan menggabungkan perubahan dan membuat merge commit secara otomatis.
+   - Jika ada konflik, Git akan memberitahu file mana yang perlu kamu selesaikan secara manual.
+
+4. **Setelah merge selesai dan commit sudah dibuat, kamu bisa menghapus branch feature/feature1 jika sudah tidak diperlukan:**
+   ```bash
+   git branch -d feature/feature1
+   ```
+
+### Opsi tambahan untuk merge
+
+- Jika kamu ingin membuat merge commit walaupun Git bisa melakukan fast-forward merge (agar riwayat merge lebih jelas), gunakan:
+  ```bash
+  git merge --no-ff feature/feature1
+  ```
+- Jika kamu ingin riwayat commit jadi lebih rapi dengan menggabungkan semua commit di feature branch menjadi satu commit sebelum merge, kamu bisa melakukan squash merge secara manual:
+  ```bash
+  git checkout feature/feature1
+  git rebase -i develop
+  git checkout develop
+  git merge --squash feature/feature1
+  git commit -m "Gabungkan fitur feature1 ke develop"
+  ```
+
+### Alternatif: Merge via Pull Request di GitHub
+
+Kalau kamu menggunakan GitHub, biasanya workflow kolaborasi yang baik adalah:
+
+- Push branch `feature/feature1` ke remote.
+- Buat **Pull Request** dari `feature/feature1` ke `develop`.
+- Lakukan review dan diskusi kode.
+- Setelah disetujui, merge PR melalui antarmuka GitHub dengan opsi merge yang tersedia (merge commit, squash and merge, atau rebase and merge).
+
+Dengan langkah-langkah tersebut, kamu bisa menggabungkan fitur yang sudah selesai ke branch develop dengan aman dan terstruktur[1][2][3][4].
+
+[1] https://liupurnomo.com/git-flow-untuk-pemula-yang-mau-tampil-pro/
+[2] https://www.atlassian.com/git/tutorials/using-branches/git-merge
+[3] https://www.hostinger.com/id/tutorial/perintah-git-dasar
+[4] https://www.dicoding.com/blog/cara-berkolaborasi-di-repositori-github/
+[5] https://dev.to/yudhasdev/tutorial-github-3-bagaimana-cara-menggunakan-branch-dan-merge-di-github-3nj1
+[6] https://www.hostinger.com/id/tutorial/git-branch
+[7] https://dev.to/mandaputtra/git-workflow-mudah-kok-1d5g
+[8] https://soaltekno.lokercepat.id/bagaimana-cara-menyelesaikan-konflik-merge-di-git/
