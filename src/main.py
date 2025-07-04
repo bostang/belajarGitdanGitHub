@@ -10,3 +10,6 @@ if __name__ == '__main__':
 
 def fitur1():
     print("ini adalah fitur1 yang ditambahkan")
+
+def fitur2():
+    print("fitur2++")
