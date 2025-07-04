@@ -139,3 +139,70 @@ Dengan langkah-langkah tersebut, kamu bisa menggabungkan fitur yang sudah selesa
 [6] https://www.hostinger.com/id/tutorial/git-branch
 [7] https://dev.to/mandaputtra/git-workflow-mudah-kok-1d5g
 [8] https://soaltekno.lokercepat.id/bagaimana-cara-menyelesaikan-konflik-merge-di-git/
+
+---
+
+Jika kamu sedang berada di branch `feature/feature1` dan ingin **mengambil (pull) perubahan terbaru dari branch `main`** agar fitur yang kamu kembangkan tetap up-to-date dengan kode utama, kamu bisa lakukan langkah berikut:
+
+### Cara menggabungkan update dari `main` ke branch `feature/feature1`
+
+1. Pastikan kamu sedang di branch `feature/feature1`:
+   ```bash
+   git checkout feature/feature1
+   ```
+2. **Tarik perubahan terbaru dari branch `main` remote** tanpa langsung merge:
+   ```bash
+   git fetch origin main
+   ```
+3. **Merge perubahan dari `main` ke `feature/feature1`:**
+   ```bash
+   git merge origin/main
+   ```
+   - Jika ada konflik, Git akan memberitahu file yang perlu kamu selesaikan.
+   - Setelah konflik diselesaikan, lakukan commit untuk menyelesaikan merge.
+
+### Alternatif: Pull dan merge langsung dari remote main ke branch feature
+
+Kalau kamu ingin langsung tarik dan merge dalam satu perintah:
+
+```bash
+git pull origin main
+```
+
+Perintah ini akan mengambil update dari remote `main` dan menggabungkannya ke branch `feature/feature1` yang sedang aktif.
+
+### Catatan tambahan
+
+- Jika kamu ingin riwayat commit lebih bersih, bisa menggunakan rebase daripada merge:
+
+  ```bash
+  git fetch origin main
+  git rebase origin/main
+  ```
+
+  Ini akan memindahkan commit kamu di atas commit terbaru dari `main`.
+
+**Ringkasnya:**  
+Untuk menggabungkan update dari `main` ke branch fitur yang sedang kamu kerjakan, kamu bisa gunakan:
+
+```bash
+git fetch origin main
+git merge origin/main
+```
+
+atau langsung:
+
+```bash
+git pull origin main
+```
+
+Ini akan memastikan branch `feature/feature1` kamu sinkron dengan perubahan terbaru dari `main`[1][3][5].
+
+[1] https://www.linkedin.com/pulse/ultimate-guide-pulling-from-different-branches-git-cengkuru-michael
+[2] https://stackoverflow.com/questions/1709177/pull-a-certain-branch-from-the-remote-server
+[3] https://www.geeksforgeeks.org/git/how-to-git-pull-from-a-specific-branch/
+[4] https://www.datacamp.com/tutorial/git-pull
+[5] https://graphite.dev/guides/how-to-pull-from-another-branch-in-git
+[6] https://www.w3schools.com/git/git_branch_pull_from_remote.asp
+[7] https://www.atlassian.com/git/tutorials/syncing/git-pull
+[8] https://git-scm.com/docs/git-pull
